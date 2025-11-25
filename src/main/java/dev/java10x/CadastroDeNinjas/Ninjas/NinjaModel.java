@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.UUID;
 
 //Entity ele transforma uma classe em uma entidade do BD
 // JPA = Java Persistence API
@@ -19,11 +20,16 @@ public class NinjaModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private Long id;
+    private UUID id;
+
+    @Column(name = "nome" )
     private String nome ;
+
     private String cla ;
     private Character rank ;
     private String tecnicas;
+
+    @Column(name = "idade" )
     private int idade ;
 
     @Column(unique = true)
