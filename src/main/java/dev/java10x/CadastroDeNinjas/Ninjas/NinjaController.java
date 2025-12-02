@@ -3,9 +3,18 @@ package dev.java10x.CadastroDeNinjas.Ninjas;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.UUID;
+
 @RestController
 @RequestMapping("/ninjas")
 public class NinjaController {
+
+    private NinjaService ninjaService;
+
+    public NinjaController(NinjaService ninjaService) {
+        this.ninjaService = ninjaService;
+    }
 
     @GetMapping("/boasvindas")
     public String boasVindas(){
@@ -20,14 +29,14 @@ public class NinjaController {
 
     //Mostrar todos os ninjas ( READ )
     @GetMapping("/listar")
-    public String mostrarTodosOsNinjas() {
-        return "Mostrar todos os ninjas";
+    public List<NinjaModel> listarTodosOsNinjas() {
+        return ninjaService.listarNinjas() ;
     }
 
     //Procurar Ninja por ID  ( READ )
-    @GetMapping("/todosID")
-    public String mostrarTodosOsNinjasPorID() {
-        return "Mostrar ninjas por ID";
+    @GetMapping("/listar/{id}")
+    public NinjaModel listarNinjasPorID( @PathVariable UUID id ) {
+        return ninjaService.listarPorID(id) ;
     }
 
     //Alterar dados dos ninjas ( UPDATE )
