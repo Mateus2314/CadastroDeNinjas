@@ -1,6 +1,8 @@
 package dev.java10x.CadastroDeNinjas.Ninjas;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
@@ -30,6 +32,14 @@ public class NinjaService {
     //Criar um novo ninja
     public NinjaModel criarNinja( NinjaModel ninja ){
         return ninjaRepository.save(ninja);
+    }
+
+    //Deletar o ninja
+    public NinjaModel deletarPorID(UUID id) {
+        NinjaModel ninja = ninjaRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Ninja não encontrado"));
+        ninjaRepository.delete(ninja);
+        return ninja;
     }
 
 
