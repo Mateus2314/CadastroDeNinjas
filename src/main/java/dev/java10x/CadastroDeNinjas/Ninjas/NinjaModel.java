@@ -40,7 +40,8 @@ public class NinjaModel {
     @JoinColumn(name = "missoes_id") // Foreing Key ou chave estrangeira
     private MissoesModel missoes ;
 
-
-
+    //Novo campo aplicado depois do migrations
+    @Column(name = "sobreNome")
+    private String sobreNome ;
 
 }
