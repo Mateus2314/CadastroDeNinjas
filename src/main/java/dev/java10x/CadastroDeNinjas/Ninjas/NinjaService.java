@@ -50,21 +50,21 @@ public class NinjaService {
     //Deletar o ninja
     public NinjaModel deletarPorID(UUID id) {
         NinjaModel ninja = ninjaRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Ninja não encontrado"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Ninja de ID: "+ id +" não encontrado"));
         ninjaRepository.delete(ninja);
         return ninja;
     }
 
     // Atualizar o ninja
-    public NinjaDTO atualizarNinja( UUID id, NinjaDTO ninjaDTO ) {
-        Optional<NinjaModel> ninjaExistente = ninjaRepository.findById(id);
-        if (ninjaExistente.isPresent()){
-            NinjaModel ninjaAtualizado = ninjaMapper.map(ninjaDTO);
-            ninjaAtualizado.setId(id);
-            NinjaModel ninjaSalvo = ninjaRepository.save(ninjaAtualizado);
-            return ninjaMapper.map(ninjaSalvo);
-        }
-        return null;
+    public NinjaDTO atualizarNinja(UUID id, NinjaDTO ninjaDTO) {
+        NinjaModel ninjaExistente = ninjaRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Ninja de ID: " + id + " não encontrado"));
+
+        NinjaModel ninjaAtualizado = ninjaMapper.map(ninjaDTO);
+        ninjaAtualizado.setId(id);
+        NinjaModel ninjaSalvo = ninjaRepository.save(ninjaAtualizado);
+
+        return ninjaMapper.map(ninjaSalvo);
     }
 
 
