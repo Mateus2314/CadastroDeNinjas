@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <meta charset="UTF-8">
+    <title>Cadastrar Ninja</title>
+</head>
+<body>
+<h1>Cadastrar Novo Ninja</h1>
+<form th:action="@{/ninjas/ui/salvar}" th:object="${ninja}" method="post">
+    Nome: <input type="text" th:field="*{nome}" required /><br/>
+    Sobrenome: <input type="text" th:field="*{sobreNome}" required /><br/>
+    Idade: <input type="number" th:field="*{idade}" min="10" max="100" required /><br/>
+    Rank:
+    <select th:field="*{rank}" required>
+        <option value="">Selecione...</option>
+        <option value="G">Genin</option>
+        <option value="C">Chunin</option>
+        <option value="J">Jounin</option>
+        <option value="S">Sannin</option>
+    </select><br/>
+    Email: <input type="email" th:field="*{email}" required /><br/>
+    Técnicas: <input type="text" th:field="*{tecnicas}" /><br/>
+
+    Missão:
+    <select th:field="*{missoes}" required>
+        <option value="">Selecione uma missão</option>
+        <option th:each="missao : ${missoes}"
+                th:value="${missao.id}"
+                th:text="${missao.nomeDaMissao + ' - ' + missao.dificuldade}">
+        </option>
+    </select><br/>
+
+    <button type="submit">Salvar</button>
+</form>
+<a th:href="@{/ninjas/ui/listar}">Voltar</a>
+</body>
+</html>

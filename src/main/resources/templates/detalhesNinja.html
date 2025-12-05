@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <title>Detalhes do Ninja</title>
+</head>
+<body class="ninja-detalhes">
+<div class="card">
+    <h1 th:text="'Detalhes do Ninja: ' + ${ninja.nome}"></h1>
+
+    <ul>
+        <li>
+            <strong>ID:</strong>
+            <span th:text="${ninja.id}"></span>
+        </li>
+        <li>
+            <strong>Nome:</strong>
+            <span th:text="${ninja.nome}"></span>
+        </li>
+        <li>
+            <strong>Sobrenome:</strong>
+            <span th:text="${ninja.sobreNome} ?: '—'"></span>
+        </li>
+        <li>
+            <strong>Idade:</strong>
+            <span th:text="${ninja.idade}"></span>
+        </li>
+        <li>
+            <strong>Rank:</strong>
+            <span th:text="${ninja.rank}"></span>
+        </li>
+        <li>
+            <strong>Email:</strong>
+            <span th:text="${ninja.email}"></span>
+        </li>
+    </ul>
+
+    <a th:href="@{/ninjas/ui/listar}" class="btn">Voltar</a>
+</div>
+</body>
+</html>
